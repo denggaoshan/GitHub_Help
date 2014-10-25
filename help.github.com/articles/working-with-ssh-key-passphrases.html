@@ -1,0 +1,83 @@
+<!DOCTYPE html> <html> <head> <link rel="search" type="application/opensearchdescription+xml" href="../opensearch.xml" title="GitHub:Help" /> <title> Working with SSH key passphrases </title> <link rel="icon" type="image/x-icon" href="../assets/images/site/favicon.ico"> <link rel="stylesheet" href="../assets/stylesheets/application.css"> <script src="../assets/application.js"></script> <script src="../assets/application_cs.js"></script> <meta name="Description" content=" This article will walk you through the process of securing your SSH keys and configuring an authentication agent so that you won&#39;t have to re-enter your passphrase every time you use your keys.â€¦"> <script type="text/javascript"> $(function() { $('#quicksearch-query').lunrSearch({ indexUrl: '/search/search.json', quickSearchResults: '.autocomplete-results', quickSearchEntries: '.result-group', quickSearchTemplate: '#quicksearch-results-template', searchResults: '.search-container', searchEntries: '.search-results', searchTemplate: '#search-results-template' }); }); </script> <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-3769691-27']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script> <meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> </head> <body id="com">
+
+
+<!-- Copyright © 2005. Spidersoft Ltd -->
+<style>
+A.applink:hover {border: 2px dotted #DCE6F4;padding:2px;background-color:#ffff00;color:green;text-decoration:none}
+A.applink       {border: 2px dotted #DCE6F4;padding:2px;color:#2F5BFF;background:transparent;text-decoration:none}
+A.info          {color:#2F5BFF;background:transparent;text-decoration:none}
+A.info:hover    {color:green;background:transparent;text-decoration:underline}
+</style>
+<div style='BORDER: 1px solid #DCE6F4; MARGIN-TOP: 20px; MARGIN-BOTTOM: 20px; MARGIN-LEFT: 5px; MARGIN-RIGHT: 5px; PADDING: 5px; BACKGROUND-COLOR: #eef8ff;line-height:180%; COLOR: #000000; font-family: Arial; font-size: 8pt; width=100%; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr="#FFFFFFFF", EndColorStr="#F2F5FAFF");'>
+This page was saved using <a class="applink" href="http://www.spidersoft.com"><b>WebZIP 7.0.3.1030</b></a> <a class="applink" href="http://www.spidersoft.com"><b>offline browser</b></a>  (Unregistered) on  10/25/14 9:51:16.<br>
+<b>Address:</b> <a class="info" href="https://help.github.com/articles/working-with-ssh-key-passphrases">https://help.github.com/articles/working-with-ssh-key-passphrases</a><br>
+<b>Title:</b> Working with SSH key passphrases &nbsp;&bull;&nbsp; <b>Size:</b> 12339 &nbsp;&bull;&nbsp; <b>Last Modified:</b> Thu, 23 Oct 2014 03:01:59 GMT<br></div>
+<!-- /Copyright © 2005. Spidersoft Ltd -->
+
+ <div id="not-footer"> <div id="header"> <div class="clearfix"> <h1 class="site-logo"><a href="../help.github.html">GitHub Help</a></h1> <ul class="top-nav"> <li><a href="https://github.com/contact">Contact Support</a></li> <li><a href="http://www.github.com/">Return to GitHub</a></li> </ul> </div> </div> <div id="content-wrapper"> <div class="site"> <div class="content-header small"> <h6 class="breadcrumbs"> <!-- hidden articles do not have categories --> <a href="../categories/ssh.html"> SSH </a> / Working with SSH key passphrases </h6> <div class="search-form small"> <script id="quicksearch-results-template" type="text/mustache"> <div class="header"> <a class="initial quicksearch-seemore" href="/search?q=">See more results</a> </div> {{#entries}} <tr class="article"> <td class="info"> <a href="{{url}}" class="js-articles-quicksearch-link">{{title}}</a> </td> </tr> {{/entries}} </script> <form accept-charset="UTF-8" action="/search" id="articles-search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div> <div class="outer"> <div class="inner fade-label"> <input type="text" name="q" id="quicksearch-query" class="js-articles-quicksearch" placeholder="How can we help?" /> <button><span class="octicon octicon-search"></span>Search</button> </div> </div> </form> <div class="autocomplete-results" style="display: none;"> <table class="result-group" border="0" cellpadding="0" cellspacing="0"> </table> </div> </div> <span class="last-updated-at">Article last updated on <span class="last-modified-at-date">23-Oct-14</span></span> </div> <div class="article js-hide-during-search"> <h2>Working with SSH key passphrases</h2> <div id="article-platform-nav"> <ul> <!-- http://bit.ly/TE6i98 --> <li class="platform-mac"> <a href="#platform-mac" data-platform="mac"> mac </a> </li> <li class="platform-windows"> <a href="#platform-windows" data-platform="windows"> windows </a> </li> <li class="platform-linux"> <a href="#platform-linux" data-platform="linux"> linux </a> </li> <li class="platform-all"> <a href="#platform-all" data-platform="all"> all </a> </li> </ul> </div> <div class="article-body content-body wikistyle markdown-format"> <div class="intro"> <p>This article will walk you through the process of securing your SSH keys and configuring an authentication agent so that you won't have to re-enter your passphrase every time you use your keys.</p> </div> <h3> <a name="why-do-i-need-a-passphrase" class="anchor" href="#why-do-i-need-a-passphrase"><span class="octicon octicon-link"></span></a>Why do I need a passphrase?</h3> <p>Passwords aren't very secure. If you use one that's easy to remember, it's also easier to guess or brute-force (try many options until one works). If you use one that's random, it's hard to remember, and thus you're more inclined to write it down. Both of these are Very Bad Things.</p> <p>This is why you're using SSH keys. Of course, using a key without a passphrase is basically the same as writing down a random password: anyone who gains access to your computer has gained access to every system you use that key with. This is also a Very Bad Thing. The solution is to add a passphrase to the SSH key for an extra layer of security.</p> <h4> <a name="but-i-dont-want-to-enter-a-long-passphrase-every-time-i-use-the-key" class="anchor" href="#but-i-dont-want-to-enter-a-long-passphrase-every-time-i-use-the-key"><span class="octicon octicon-link"></span></a>But I don't want to enter a long passphrase every time I use the key!</h4> <p>Neither do I! Thankfully, there's a nifty little tool called <code>ssh-agent</code> that can securely save your passphrase, so you don't have to re-enter it. If you're on OS X Leopard or later your keys can be saved in the system's keychain to make your life even easier. Most Linux installations will automatically start <code>ssh-agent</code> for you when you log in.</p> <h3> <a name="adding-or-changing-a-passphrase" class="anchor" href="#adding-or-changing-a-passphrase"><span class="octicon octicon-link"></span></a>Adding or changing a passphrase</h3> <p>You can change the passphrase for an existing private key without regenerating the keypair. Just type the following command:</p><pre class="command-line">
+<span class="command">ssh-keygen -p</span>
+<span class="comment"># Start the SSH key creation process</span>
+<span class="output"><span># </span>Enter file in which the key is (/Users/<em>you</em>/.ssh/id_rsa): <em>[Hit enter]</em></span>
+<span class="output"><span># </span>Key has comment '/Users/<em>you</em>/.ssh/id_rsa'</span>
+<span class="output"><span># </span>Enter new passphrase (empty for no passphrase): <em>[Type new passphrase]</em></span>
+<span class="output"><span># </span>Enter same passphrase again: <em>[One more time for luck]</em></span>
+<span class="output"><span># </span>Your identification has been saved with the new passphrase.</span>
+</pre><p>If your key already has a passphrase, you will be prompted to enter it before you can change to a new passphrase.</p> <div class="platform-windows"> <h3> <a name="auto-launching-ssh-agent-on-msysgit" class="anchor" href="#auto-launching-ssh-agent-on-msysgit"><span class="octicon octicon-link"></span></a>Auto-launching ssh-agent on msysgit</h3> <p><code>ssh-agent</code> is a tool that provides a secure way of storing and using your SSH keys.</p> <p>You can run <code>ssh-agent</code> automatically when you open bash. Copy the following lines and paste them into your <code>~/.profile</code> or <code>~/.bashrc</code> file:</p><pre lang="bash"><code># Note: ~/.ssh/environment should not be used, as it
+#       already has a different purpose in SSH.
+
+env=~/.ssh/agent.env
+
+# Note: Don't bother checking SSH_AGENT_PID. It's not used
+#       by SSH itself, and it might even be incorrect
+#       (for example, when using agent-forwarding over SSH).
+
+agent_is_running() {
+    if [ "$SSH_AUTH_SOCK" ]; then
+        # ssh-add returns:
+        #   0 = agent running, has keys
+        #   1 = agent running, no keys
+        #   2 = agent not running
+        ssh-add -l &gt;/dev/null 2&gt;&amp;1 || [ $? -eq 1 ]
+    else
+        false
+    fi
+}
+
+agent_has_keys() {
+    ssh-add -l &gt;/dev/null 2&gt;&amp;1
+}
+
+agent_load_env() {
+    . "$env" &gt;/dev/null
+}
+
+agent_start() {
+    (umask 077; ssh-agent &gt;"$env")
+    . "$env" &gt;/dev/null
+}
+
+if ! agent_is_running; then
+    agent_load_env
+fi
+
+# if your keys are not stored in ~/.ssh/id_rsa.pub or ~/.ssh/id_dsa.pub, you'll need
+# to paste the proper path after ssh-add
+if ! agent_is_running; then
+    agent_start
+    ssh-add
+elif ! agent_has_keys; then
+    ssh-add
+fi
+
+unset env
+</code></pre><div class="alert tip"> <p><strong>Tip</strong>: If your private keys are not stored in <em>~/.ssh/id_rsa</em> or <em>~/.ssh/id_dsa</em>, you must add their paths with the <code>ssh-add</code> command so that your SSH authentication agent knows where to find them. For example:</p><pre lang="bash"><code>ssh-add ~/.my_other_ssh/id_rsa
+</code></pre></div> <p>Now, when you first run Git Bash, you are prompted for your passphrase:</p><pre class="command-line">
+<span class="output"><span># </span>Initializing new SSH agent...</span>
+<span class="output"><span># </span>succeeded</span>
+<span class="output"><span># </span>Enter passphrase for /c/Users/<em>you</em>/.ssh/id_rsa:</span>
+<span class="output"><span># </span>Identity added: /c/Users/<em>you</em>/.ssh/id_rsa (/c/Users/<em>you</em>/.ssh/id_rsa)</span>
+<span class="output"><span># </span>Welcome to Git (version <em>1.6.0.2-preview20080923</em>)</span>
+&gt;
+<span class="output"><span># </span>Run 'git help git' to display the help index.</span>
+<span class="output"><span># </span>Run 'git help <command>' to display help for specific commands.</command></span>
+</pre><p>The <code>ssh-agent</code> process will continue to run until you log out, shut down your computer, or kill the process.</p> <p>If you want <code>ssh-agent</code> to forget your key after some time, you can configure it to do so by running <code>ssh-add -t &lt;seconds&gt;</code>.</p> <p><em>This section was written with help from <a href="http://superuser.com/questions/441854/git-ssh-agent-not-working">this post</a>.</em></p> </div> <div class="platform-mac"> <h3> <a name="os-x-keychain" class="anchor" href="#os-x-keychain"><span class="octicon octicon-link"></span></a>OS X Keychain</h3> <p>If you are on OS X Leopard or later, <code>ssh-agent</code> runs automatically for you. It will also integrate with the keychain, so you can unlock your keys with it. This has some major advantages over a command-line based setup: for example, it protects your input from being copied or spied upon by universal access or low-level keyboard routines.</p> <p>The default private key files (<code>.ssh/id_rsa</code>, <code>.ssh/id_dsa</code>, and <code>.ssh/identity</code>) should be handled automatically. If you have a private key with a different name, you can add it by typing <code>ssh-add -K path/to/my_key</code>.</p> <div class="alert tip"> <p><strong>Tip</strong>: Make sure you're using the default OS X <code>ssh-add</code> command, and not one installed by <a href="https://www.macports.org/">macports</a>, <a href="http://brew.sh/">homebrew</a>, or some other external source.</p> </div> <p>When you first try to use the key, you are prompted to enter your passphrase:</p> <p><img src="../assets/images/help/setup/ssh_prompt.jpg" alt="Keychain prompt"></p> <p>If you choose to save the passphrase with your keychain, you won't have to enter it again. Instead you'll simply need to unlock your keychain.</p> <p><em>This section was written with help from <a href="http://www.dribin.org/dave/blog/archives/2007/11/28/ssh_agent_leopard/">this guide</a>. If you would like to use more paranoid keychain settings like locking after sleep, check out <a href="http://www.dribin.org/dave/blog/archives/2007/11/28/securing_ssh_agent/">this guide</a>.</em></p> </div> </div> <div class="support-footer"> <hr /> <ul class="article-footer button-nav"> <li> <a href="https://github.com/contact" class="minibutton"> <span class="octicon octicon-comment-discussion"></span> Contact a human </a> </li> </ul> </div> </div> <div class="clear"></div> </div> </div> </div> <div id="footer"> <div class="inner"> <a href="https://github.com/" class="invertocat"> <img alt="The GitHub Logo" src="../assets/images/site/invertocat.png" width="24" height="24" /> </a> <p class="left"> &copy; <span id="year">2014</span> GitHub Inc. All rights reserved. </p> <ul class="links right"> <li><a href="../terms-of-service.html">Terms of Service</a></li> <li><a href="../privacy-policy.html">Privacy</a></li> <li><a href="../security.html">Security</a></li> </ul> </div> </div> </body> </html>

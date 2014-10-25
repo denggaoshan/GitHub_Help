@@ -1,0 +1,68 @@
+<!DOCTYPE html> <html> <head> <link rel="search" type="application/opensearchdescription+xml" href="../opensearch.xml" title="GitHub:Help" /> <title> Support for Subversion clients </title> <link rel="icon" type="image/x-icon" href="../assets/images/site/favicon.ico"> <link rel="stylesheet" href="../assets/stylesheets/application.css"> <script src="../assets/application.js"></script> <script src="../assets/application_cs.js"></script> <meta name="Description" content=" GitHub repositories can be accessed from both Git and Subversion (SVN) clients. This article covers using a Subversion client on GitHub and some common problems that you might run into. GitHub sâ€¦"> <script type="text/javascript"> $(function() { $('#quicksearch-query').lunrSearch({ indexUrl: '/search/search.json', quickSearchResults: '.autocomplete-results', quickSearchEntries: '.result-group', quickSearchTemplate: '#quicksearch-results-template', searchResults: '.search-container', searchEntries: '.search-results', searchTemplate: '#search-results-template' }); }); </script> <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-3769691-27']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script> <meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> </head> <body id="com">
+
+
+<!-- Copyright © 2005. Spidersoft Ltd -->
+<style>
+A.applink:hover {border: 2px dotted #DCE6F4;padding:2px;background-color:#ffff00;color:green;text-decoration:none}
+A.applink       {border: 2px dotted #DCE6F4;padding:2px;color:#2F5BFF;background:transparent;text-decoration:none}
+A.info          {color:#2F5BFF;background:transparent;text-decoration:none}
+A.info:hover    {color:green;background:transparent;text-decoration:underline}
+</style>
+<div style='BORDER: 1px solid #DCE6F4; MARGIN-TOP: 20px; MARGIN-BOTTOM: 20px; MARGIN-LEFT: 5px; MARGIN-RIGHT: 5px; PADDING: 5px; BACKGROUND-COLOR: #eef8ff;line-height:180%; COLOR: #000000; font-family: Arial; font-size: 8pt; width=100%; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr="#FFFFFFFF", EndColorStr="#F2F5FAFF");'>
+This page was saved using <a class="applink" href="http://www.spidersoft.com"><b>WebZIP 7.0.3.1030</b></a> <a class="applink" href="http://www.spidersoft.com"><b>offline browser</b></a>  (Unregistered) on  10/25/14 9:51:16.<br>
+<b>Address:</b> <a class="info" href="https://help.github.com/articles/support-for-subversion-clients">https://help.github.com/articles/support-for-subversion-clients</a><br>
+<b>Title:</b> Support for Subversion clients &nbsp;&bull;&nbsp; <b>Size:</b> 11446 &nbsp;&bull;&nbsp; <b>Last Modified:</b> Thu, 23 Oct 2014 03:01:59 GMT<br></div>
+<!-- /Copyright © 2005. Spidersoft Ltd -->
+
+ <div id="not-footer"> <div id="header"> <div class="clearfix"> <h1 class="site-logo"><a href="../help.github.html">GitHub Help</a></h1> <ul class="top-nav"> <li><a href="https://github.com/contact">Contact Support</a></li> <li><a href="http://www.github.com/">Return to GitHub</a></li> </ul> </div> </div> <div id="content-wrapper"> <div class="site"> <div class="content-header small"> <h6 class="breadcrumbs"> <!-- hidden articles do not have categories --> <a href="../categories/importing.html"> Importing </a> / Support for Subversion clients </h6> <div class="search-form small"> <script id="quicksearch-results-template" type="text/mustache"> <div class="header"> <a class="initial quicksearch-seemore" href="/search?q=">See more results</a> </div> {{#entries}} <tr class="article"> <td class="info"> <a href="{{url}}" class="js-articles-quicksearch-link">{{title}}</a> </td> </tr> {{/entries}} </script> <form accept-charset="UTF-8" action="/search" id="articles-search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div> <div class="outer"> <div class="inner fade-label"> <input type="text" name="q" id="quicksearch-query" class="js-articles-quicksearch" placeholder="How can we help?" /> <button><span class="octicon octicon-search"></span>Search</button> </div> </div> </form> <div class="autocomplete-results" style="display: none;"> <table class="result-group" border="0" cellpadding="0" cellspacing="0"> </table> </div> </div> <span class="last-updated-at">Article last updated on <span class="last-modified-at-date">23-Oct-14</span></span> </div> <div class="article js-hide-during-search"> <h2>Support for Subversion clients</h2> <div id="article-platform-nav"> <ul> <!-- http://bit.ly/TE6i98 --> <li class="platform-mac"> <a href="#platform-mac" data-platform="mac"> mac </a> </li> <li class="platform-windows"> <a href="#platform-windows" data-platform="windows"> windows </a> </li> <li class="platform-linux"> <a href="#platform-linux" data-platform="linux"> linux </a> </li> <li class="platform-all"> <a href="#platform-all" data-platform="all"> all </a> </li> </ul> </div> <div class="article-body content-body wikistyle markdown-format"> <div class="intro"> <p>GitHub repositories can be accessed from both Git and Subversion (SVN) clients. This article covers using a Subversion client on GitHub and some common problems that you might run into.</p> </div> <p>GitHub supports Subversion clients via the HTTPS protocol. We use a Subversion bridge to communicate svn commands to GitHub.</p> <h3> <a name="supported-subversion-features-on-github" class="anchor" href="#supported-subversion-features-on-github"><span class="octicon octicon-link"></span></a>Supported Subversion features on GitHub</h3> <h4> <a name="checkout" class="anchor" href="#checkout"><span class="octicon octicon-link"></span></a>Checkout</h4> <p>The first thing you'll want to do is a Subversion checkout. Since Git clones keep the working directory (where you edit files) separate from the repository data, there is only one branch in the working directory at a time.</p> <p>Subversion checkouts are different: they mix the repository data in the working directories, so there is a working directory for each branch and tag you've checked out. For repositories with many branches and tags, checking out everything can be a bandwidth burden, so you should start with a partial checkout.</p> <p>Start by browsing to the repository page on github.com to get the HTTPS clone URL:</p> <p><img src="../assets/images/help/repository/https-url-clone.png" alt="HTTPS Clone URL"></p> <p>Then, get your checkout ready:</p> <ol> <li><p>Browse to the repository page on GitHub and copy the HTTPS clone URL: <img src="../assets/images/help/repository/https-url-clone.png" alt="HTTPS Clone URL"></p></li> <li> <p>Make an empty checkout of the repository:</p><pre class="command-line">
+<span class="command">svn co --depth empty https://github.com/<em>user</em>/<em>repo</em></span>
+<span class="output"><span># </span>Checked out revision 1.</span>
+<span class="command">cd <em>repo</em></span>
+</pre></li> <li> <p>Get the <code>trunk</code> branch. The Subversion bridge maps trunk to the Git HEAD branch (which is usually <code>master</code>).</p><pre class="command-line">
+<span class="command">svn up trunk</span>
+<span class="output"><span># </span>A    trunk</span>
+<span class="output"><span># </span>A    trunk/README.md</span>
+<span class="output"><span># </span>A    trunk/gizmo.rb</span>
+<span class="output"><span># </span>Updated to revision 1.</span>
+</pre></li> <li> <p>Get an empty checkout of the <code>branches</code> directory. This is where all of the non-<code>HEAD</code> branches live, and where you'll be making feature branches.</p><pre class="command-line">
+<span class="command">svn up --depth empty branches</span>
+Updated to revision 1.
+</pre></li> </ol> <h4> <a name="creating-branches" class="anchor" href="#creating-branches"><span class="octicon octicon-link"></span></a>Creating branches</h4> <p>You can also create branches using the Subversion bridge to GitHub.</p> <p>From your svn client, make sure "master" is current by updating <code>trunk</code>:</p><pre class="command-line">
+<span class="command">svn up trunk</span>
+<span class="output"><span># </span>At revision 1.</span>
+</pre><p>Next, you can use <code>svn copy</code> to create a new branch:</p><pre class="command-line">
+<span class="command">svn copy trunk branches/more_awesome</span>
+<span class="output"><span># </span>A    branches/more_awesome</span>
+<span class="command">svn commit -m 'Added more_awesome topic branch'</span>
+<span class="output"><span># </span>Adding    branches/more_awesome</span>
+
+<span class="output"><span># </span>Committed revision 2.</span>
+</pre><p>You can confirm that the new branch exists in the repository's branch dropdown:</p> <p><img src="../assets/images/help/branch/svnflow-branch-snapshot.png" alt="branch-snapshot"></p> <p>You can also confirm the new branch via the command line:</p><pre class="command-line">
+<span class="command">git fetch</span>
+<span class="output"><span># </span>From https://github.com/<em>user</em>/<em>repo</em>/</span>
+<span class="output"><span># </span>* [new branch]    more_awesome -&gt; origin/more_awesome</span>
+</pre><h4> <a name="making-commits-to-subversion" class="anchor" href="#making-commits-to-subversion"><span class="octicon octicon-link"></span></a>Making commits to Subversion</h4> <p>After you've added some features and fixed some bugs, you'll want to commit those changes to GitHub. This works just like the Subversion you're used to. Edit your files, and use <code>svn commit</code> to record your changes:</p><pre class="command-line">
+<span class="command">svn status</span>
+<span class="output"><span># </span>M    gizmo.rb</span>
+<span class="command">svn commit -m 'Guard against known problems'</span>
+<span class="output"><span># </span>Sending    more_awesome/gizmo.rb</span>
+<span class="output"><span># </span>Transmitting file data .</span>
+<span class="output"><span># </span>Committed revision 3.</span>
+<span class="command">svn status</span>
+<span class="output"><span># </span>?    test</span>
+<span class="command">svn add test</span>
+<span class="output"><span># </span>A    test</span>
+<span class="output"><span># </span>A    test/gizmo_test.rb</span>
+<span class="command">svn commit -m 'Test coverage for problems'</span>
+<span class="output"><span># </span>Adding    more_awesome/test</span>
+<span class="output"><span># </span>Adding    more_awesome/test/gizmo_test.rb</span>
+<span class="output"><span># </span>Transmitting file data .</span>
+<span class="output"><span># </span>Committed revision 4.</span>
+</pre><h4> <a name="switching-between-branches" class="anchor" href="#switching-between-branches"><span class="octicon octicon-link"></span></a>Switching between branches</h4> <p>To switch between branches, you'll probably want to start with a checkout of <code>trunk</code>:</p><pre class="command-line">
+<span class="command">svn co --depth empty https://github.com/<em>user</em>/<em>repo</em>/trunk</span>
+</pre><p>Then, you can switch to another branch:</p><pre class="command-line">
+<span class="command">svn switch https://github.com/<em>user</em>/<em>repo</em>/branches/more_awesome</span>
+</pre><h3> <a name="finding-the-git-commit-sha-for-a-subversion-commit" class="anchor" href="#finding-the-git-commit-sha-for-a-subversion-commit"><span class="octicon octicon-link"></span></a>Finding the Git commit SHA for a Subversion commit</h3> <p>GitHub's Subversion server exposes the Git commit sha for each Subversion commit.</p> <p>To see the commit SHA, you should ask for the <code>git-commit</code> unversioned remote property.</p><pre class="command-line">
+<span class="command">svn propget git-commit --revprop -r HEAD https://github.com/<em>user</em>/<em>repo</em></span>
+05fcc584ed53d7b0c92e116cb7e64d198b13c4e3
+</pre><p>With this commit SHA, you can, for example, look up the corresponding Git commit on GitHub.</p> </div> <div class="support-footer"> <hr /> <ul class="article-footer button-nav"> <li> <a href="https://github.com/contact" class="minibutton"> <span class="octicon octicon-comment-discussion"></span> Contact a human </a> </li> </ul> </div> </div> <div class="clear"></div> </div> </div> </div> <div id="footer"> <div class="inner"> <a href="https://github.com/" class="invertocat"> <img alt="The GitHub Logo" src="../assets/images/site/invertocat.png" width="24" height="24" /> </a> <p class="left"> &copy; <span id="year">2014</span> GitHub Inc. All rights reserved. </p> <ul class="links right"> <li><a href="../terms-of-service.html">Terms of Service</a></li> <li><a href="../privacy-policy.html">Privacy</a></li> <li><a href="../security.html">Security</a></li> </ul> </div> </div> </body> </html>

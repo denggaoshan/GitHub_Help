@@ -1,0 +1,101 @@
+<!DOCTYPE html> <html> <head> <link rel="search" type="application/opensearchdescription+xml" href="../opensearch.xml" title="GitHub:Help" /> <title> Resolving a merge conflict from the command line </title> <link rel="icon" type="image/x-icon" href="../assets/images/site/favicon.ico"> <link rel="stylesheet" href="../assets/stylesheets/application.css"> <script src="../assets/application.js"></script> <script src="../assets/application_cs.js"></script> <meta name="Description" content=" This guide demonstrates how to resolve some common conflicts via the command line. You will need a text editor to resolve some of the conflicts. Creating an edit collision This is the most coâ€¦"> <script type="text/javascript"> $(function() { $('#quicksearch-query').lunrSearch({ indexUrl: '/search/search.json', quickSearchResults: '.autocomplete-results', quickSearchEntries: '.result-group', quickSearchTemplate: '#quicksearch-results-template', searchResults: '.search-container', searchEntries: '.search-results', searchTemplate: '#search-results-template' }); }); </script> <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-3769691-27']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script> <meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> </head> <body id="com">
+
+
+<!-- Copyright © 2005. Spidersoft Ltd -->
+<style>
+A.applink:hover {border: 2px dotted #DCE6F4;padding:2px;background-color:#ffff00;color:green;text-decoration:none}
+A.applink       {border: 2px dotted #DCE6F4;padding:2px;color:#2F5BFF;background:transparent;text-decoration:none}
+A.info          {color:#2F5BFF;background:transparent;text-decoration:none}
+A.info:hover    {color:green;background:transparent;text-decoration:underline}
+</style>
+<div style='BORDER: 1px solid #DCE6F4; MARGIN-TOP: 20px; MARGIN-BOTTOM: 20px; MARGIN-LEFT: 5px; MARGIN-RIGHT: 5px; PADDING: 5px; BACKGROUND-COLOR: #eef8ff;line-height:180%; COLOR: #000000; font-family: Arial; font-size: 8pt; width=100%; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr="#FFFFFFFF", EndColorStr="#F2F5FAFF");'>
+This page was saved using <a class="applink" href="http://www.spidersoft.com"><b>WebZIP 7.0.3.1030</b></a> <a class="applink" href="http://www.spidersoft.com"><b>offline browser</b></a>  (Unregistered) on  10/25/14 9:51:15.<br>
+<b>Address:</b> <a class="info" href="https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line">https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line</a><br>
+<b>Title:</b> Resolving a merge conflict from the command line &nbsp;&bull;&nbsp; <b>Size:</b> 13573 &nbsp;&bull;&nbsp; <b>Last Modified:</b> Thu, 23 Oct 2014 03:01:59 GMT<br></div>
+<!-- /Copyright © 2005. Spidersoft Ltd -->
+
+ <div id="not-footer"> <div id="header"> <div class="clearfix"> <h1 class="site-logo"><a href="../help.github.html">GitHub Help</a></h1> <ul class="top-nav"> <li><a href="https://github.com/contact">Contact Support</a></li> <li><a href="http://www.github.com/">Return to GitHub</a></li> </ul> </div> </div> <div id="content-wrapper"> <div class="site"> <div class="content-header small"> <h6 class="breadcrumbs"> <!-- hidden articles do not have categories --> <a href="../categories/using-git.html"> Using Git </a> / Resolving a merge conflict from the command line </h6> <div class="search-form small"> <script id="quicksearch-results-template" type="text/mustache"> <div class="header"> <a class="initial quicksearch-seemore" href="/search?q=">See more results</a> </div> {{#entries}} <tr class="article"> <td class="info"> <a href="{{url}}" class="js-articles-quicksearch-link">{{title}}</a> </td> </tr> {{/entries}} </script> <form accept-charset="UTF-8" action="/search" id="articles-search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div> <div class="outer"> <div class="inner fade-label"> <input type="text" name="q" id="quicksearch-query" class="js-articles-quicksearch" placeholder="How can we help?" /> <button><span class="octicon octicon-search"></span>Search</button> </div> </div> </form> <div class="autocomplete-results" style="display: none;"> <table class="result-group" border="0" cellpadding="0" cellspacing="0"> </table> </div> </div> <span class="last-updated-at">Article last updated on <span class="last-modified-at-date">23-Oct-14</span></span> </div> <div class="article js-hide-during-search"> <h2>Resolving a merge conflict from the command line</h2> <div id="article-platform-nav"> <ul> <!-- http://bit.ly/TE6i98 --> <li class="platform-mac"> <a href="#platform-mac" data-platform="mac"> mac </a> </li> <li class="platform-windows"> <a href="#platform-windows" data-platform="windows"> windows </a> </li> <li class="platform-linux"> <a href="#platform-linux" data-platform="linux"> linux </a> </li> <li class="platform-all"> <a href="#platform-all" data-platform="all"> all </a> </li> </ul> </div> <div class="article-body content-body wikistyle markdown-format"> <div class="intro"> <p>This guide demonstrates how to resolve some common conflicts via the command line. You <em><strong>will</strong></em> need a text editor to resolve some of the conflicts.</p> </div> <h3> <a name="creating-an-edit-collision" class="anchor" href="#creating-an-edit-collision"><span class="octicon octicon-link"></span></a>Creating an edit collision</h3> <p>This is the most common type of conflict. It happens when two branches have changed the same part of the same file, and then those branches are merged together. For example, if you make a change on a particular line in a file, and your colleague working in a repository makes a change on the exact same line, a merge conflict occurs. Git has trouble understanding which change should be used, so it asks you to help out.</p> <p>When this sort of conflict occurs, Git writes a special block into the file that contains the contents of both versions where the conflict occurred. To complete this type of merge, use your text editor to resolve the conflict, then add the file and commit it to complete the merge.</p> <p>For this example, suppose you're working in <code>branch-a</code>, and have made some changes to a file called <em>planets.md</em>. Meanwhile, your friend on the other side of the world has made a different change to the same line. If you try to merge your friend's branch into yours, there will be a merge conflict. Running <code>git status</code> tells you about the conflict:</p><pre class="command-line">
+<span class="command">git status</span>
+<span class="output"><span># </span># On branch branch-b</span>
+<span class="output"><span># </span># You have unmerged paths.</span>
+<span class="output"><span># </span>#   (fix conflicts and run "git commit")</span>
+<span class="output"><span># </span>#</span>
+<span class="output"><span># </span># Unmerged paths:</span>
+<span class="output"><span># </span>#   (use "git add <file>..." to mark resolution)</file></span>
+<span class="output"><span># </span>#</span>
+<span class="output"><span># </span># both modified:      planets.md</span>
+<span class="output"><span># </span>#</span>
+<span class="output"><span># </span>no changes added to commit (use "git add" and/or "git commit -a")</span>
+</pre><p>Both of you have modified <em>planets.md</em>. When you open the file in your text editor, you'll see both changes:</p><pre><code>the number of planets are
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+nine
+=======
+eight
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-a
+</code></pre><p>In <code>branch-a</code>, you wrote the word "nine," but your friend wrote "eight." Git automatically adds <em>conflict markers</em> to the affected areas. A conflict-marked area begins with <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> and ends with <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. These are also known as the conflict markers. The two conflicting blocks themselves are divided by a <code>=======</code>.</p> <p>You have several options here. You can either keep your changes, take your friend's changes, or make a brand new change. Whatever you do, you need to make sure to resolve the conflict such that the file makes sense, and everyone is happy.</p> <p>In this case, you'll put in a whole new version of the line that reflects what happened. The goal is to get the file to look exactly how you want it. You'll delete the conflict markers, and just type out a new change:</p><pre><code>the number of planets are
+nine, or eight, depending on who you ask.
+</code></pre><p>That's it! You can now <code>git add</code> this file, commit the change with a new commit message, and be on your way.</p> <h3> <a name="resolving-a-removed-file-conflict" class="anchor" href="#resolving-a-removed-file-conflict"><span class="octicon octicon-link"></span></a>Resolving a removed file conflict</h3> <p>Removed file conflicts occur when one person edits a file, and another person deletes that file in their branch. Git does not know if you want to keep the file with the new edits, or delete the file and forget about those edits. This example will show how to resolve this both ways.</p> <h4> <a name="keeping-the-edited-file" class="anchor" href="#keeping-the-edited-file"><span class="octicon octicon-link"></span></a>Keeping the edited file</h4> <p>First, you'll resolve the conflict by keeping the new changes. Suppose that you added a line to your <em>README.md</em> in <code>branch-b</code>, but someone else has deleted the file entirely in <code>branch-c</code>. Git declares the following conflict:</p><pre class="command-line">
+<span class="output"><span># </span>CONFLICT (modify/delete): README.md deleted in HEAD and modified in branch-b. Version branch-b of README.md left in tree.</span>
+<span class="output"><span># </span>Automatic merge failed; fix conflicts and then commit the result.</span>
+
+<span class="command">git status</span>
+<span class="output"><span># </span># On branch branch-c</span>
+<span class="output"><span># </span># You have unmerged paths.</span>
+<span class="output"><span># </span>#   (fix conflicts and run "git commit")</span>
+<span class="output"><span># </span>#</span>
+<span class="output"><span># </span># Unmerged paths:</span>
+<span class="output"><span># </span>#   (use "git add/rm <file>..." as appropriate to mark resolution)</file></span>
+<span class="output"><span># </span>#</span>
+<span class="output"><span># </span># deleted by us:      README.md</span>
+<span class="output"><span># </span>#</span>
+<span class="output"><span># </span>no changes added to commit (use "git add" and/or "git commit -a")</span>
+</pre><p>You can resolve this by adding the file back, and committing it once more:</p><pre class="command-line">
+<span class="command">git add README.md</span>
+
+<span class="command">git commit</span>
+<span class="output"><span># </span>[branch-c 9bc3b01] Merge branch 'branch-b' into branch-c</span>
+
+<span class="command">git show | head</span>
+<span class="output"><span># </span>commit 9bc3b0130fe0178359d51243b5b882076a12f554</span>
+<span class="output"><span># </span>Merge: 4c80a63 7e8b679</span>
+<span class="output"><span># </span>Author: tekkub :bear:â€‚ <tekkub></tekkub></span>
+<span class="output"><span># </span>Date:   Sat Jun 1 18:39:40 2013 -0700</span>
+
+<span class="output"><span># </span>    Merge branch 'branch-b' into branch-c</span>
+&gt;
+<span class="output"><span># </span>    Conflicts:</span>
+<span class="output"><span># </span>        README.md</span>
+</pre><h4> <a name="resolving-by-removing-the-file" class="anchor" href="#resolving-by-removing-the-file"><span class="octicon octicon-link"></span></a>Resolving by removing the file</h4> <p>Now, you'll resolve that conflict the opposite way: by leaving the file deleted. Again, with a merge conflict, Git declares:</p><pre class="command-line">
+<span class="output"><span># </span>CONFLICT (modify/delete): README.md deleted in HEAD and modified in branch-c. Version branch-c of README.md left in tree.</span>
+<span class="output"><span># </span>Automatic merge failed; fix conflicts and then commit the result.</span>
+
+<span class="command">git status</span>
+<span class="output"><span># </span># On branch branch-d</span>
+<span class="output"><span># </span># You have unmerged paths.</span>
+<span class="output"><span># </span>#   (fix conflicts and run "git commit")</span>
+<span class="output"><span># </span>#</span>
+<span class="output"><span># </span># Unmerged paths:</span>
+<span class="output"><span># </span>#   (use "git add/rm <file>..." as appropriate to mark resolution)</file></span>
+<span class="output"><span># </span>#</span>
+<span class="output"><span># </span>#   deleted by us:      README.md</span>
+<span class="output"><span># </span>#</span>
+<span class="output"><span># </span>no changes added to commit (use "git add" and/or "git commit -a")</span>
+</pre><p>Now, you want to remove the file, so do that with the <code>git rm</code> command:</p><pre class="command-line">
+<span class="command">git rm README.md</span>
+<span class="output"><span># </span>README.md: needs merge</span>
+<span class="output"><span># </span>rm 'README.md'</span>
+</pre><p>Looks good, so commit it with the default message:</p><pre class="command-line">
+<span class="command">git commit</span>
+<span class="output"><span># </span>[branch-d 6f89e49] Merge branch 'branch-c' into branch-d</span>
+
+<span class="command">git show | head</span>
+<span class="output"><span># </span>commit 6f89e49189ba3a2b7440fc434f351cb041b3999e</span>
+<span class="output"><span># </span>Merge: 211261b fcc1093</span>
+<span class="output"><span># </span>Author: tekkub :bear:â€‚ <tekkub></tekkub></span>
+<span class="output"><span># </span>Date:   Sat Jun 1 18:43:01 2013 -0700</span>
+
+<span class="output"><span># </span>    Merge branch 'branch-c' into branch-d</span>
+&gt;
+<span class="output"><span># </span>    Conflicts:</span>
+<span class="output"><span># </span>        README.md</span>
+</pre></div> <div class="support-footer"> <hr /> <ul class="article-footer button-nav"> <li> <a href="https://github.com/contact" class="minibutton"> <span class="octicon octicon-comment-discussion"></span> Contact a human </a> </li> </ul> </div> </div> <div class="clear"></div> </div> </div> </div> <div id="footer"> <div class="inner"> <a href="https://github.com/" class="invertocat"> <img alt="The GitHub Logo" src="../assets/images/site/invertocat.png" width="24" height="24" /> </a> <p class="left"> &copy; <span id="year">2014</span> GitHub Inc. All rights reserved. </p> <ul class="links right"> <li><a href="../terms-of-service.html">Terms of Service</a></li> <li><a href="../privacy-policy.html">Privacy</a></li> <li><a href="../security.html">Security</a></li> </ul> </div> </div> </body> </html>
